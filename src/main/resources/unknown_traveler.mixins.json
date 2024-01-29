@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.felix3621.unknown_traveler.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "unknown_traveler.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
