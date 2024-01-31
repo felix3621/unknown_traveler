@@ -1,4 +1,5 @@
 # TODO:
+- tardis external door (open/closed) (must be open to walk in)
 - tardis inside
 - tardis systems
 
