@@ -1,4 +1,5 @@
 # TODO:
+- tardis external door walkthorugh
 - tardis inside
 - tardis systems
 
