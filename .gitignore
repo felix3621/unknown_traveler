@@ -10,3 +10,4 @@ build
 run
 run-data
 .cache/
+src/generated

@@ -7,9 +7,7 @@ import io.github.felix3621.unknown_traveler.block.custom.TardisExteriorBlockOpen
 import io.github.felix3621.unknown_traveler.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -63,10 +61,20 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLACK_CONCRETE_ROUNDEL = registerBlock("roundel/black_concrete",
             () -> new LightBlock(BlockBehaviour.Properties.copy(Blocks.BLACK_CONCRETE)));
 
-    //public static final RegistryObject<Block> foam_pipes = register("foam_pipes", () -> setUpBlock(new CubeBlock(Block.Properties.create(Material.WOOL), SoundType.CLOTH, 1F, 2F)));
     public static final RegistryObject<Block> FOAM_PIPES = registerBlock("foam_pipes",
             () -> new Block(BlockBehaviour.Properties.of(Material.WOOL)
                     .sound(SoundType.WOOL).strength(1F, 2F).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> METAL_GRATE = registerBlock("metal_grate/block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.HEAVY_METAL).noOcclusion()
+                    .sound(SoundType.LANTERN).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> METAL_GRATE_SLAB = registerBlock("metal_grate/slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of(Material.HEAVY_METAL).noOcclusion()
+                    .sound(SoundType.LANTERN).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> METAL_GRATE_STAIRs = registerBlock("metal_grate/stairs",
+            () -> new StairBlock(ModBlocks.METAL_GRATE.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of(Material.HEAVY_METAL).noOcclusion()
+                    .sound(SoundType.LANTERN).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {

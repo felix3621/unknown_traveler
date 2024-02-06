@@ -3,6 +3,7 @@
 - custom blocks:
   - concrete roundels
   - foam pipes
+  - metal grate
 
 # TODO:
 - tardis external door walkthorugh
@@ -13,7 +14,6 @@
 - tungsten plate
 - tungsten plate stairs
 - tungsten plate slabs
-- metal grate
 - metal grate stairs
 - metal grate slabs
 - tungsten
