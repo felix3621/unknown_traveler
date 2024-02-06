@@ -8,3 +8,5 @@ build
 
 # other
 run
+run-data
+.cache/
