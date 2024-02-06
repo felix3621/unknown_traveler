@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "unknown_traveler:block/foam_pipes"
+  }
+}

@@ -9,6 +9,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -61,6 +62,11 @@ public class ModBlocks {
             () -> new LightBlock(BlockBehaviour.Properties.copy(Blocks.RED_CONCRETE)));
     public static final RegistryObject<Block> BLACK_CONCRETE_ROUNDEL = registerBlock("roundel/black_concrete",
             () -> new LightBlock(BlockBehaviour.Properties.copy(Blocks.BLACK_CONCRETE)));
+
+    //public static final RegistryObject<Block> foam_pipes = register("foam_pipes", () -> setUpBlock(new CubeBlock(Block.Properties.create(Material.WOOL), SoundType.CLOTH, 1F, 2F)));
+    public static final RegistryObject<Block> FOAM_PIPES = registerBlock("foam_pipes",
+            () -> new Block(BlockBehaviour.Properties.of(Material.WOOL)
+                    .sound(SoundType.WOOL).strength(1F, 2F).requiresCorrectToolForDrops()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {

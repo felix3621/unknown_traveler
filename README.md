@@ -2,6 +2,7 @@
 - tardis exterior (clicking door will "open" and link to a new tardis dimension, if not linked)
 - custom blocks:
   - concrete roundels
+  - foam pipes
 
 # TODO:
 - tardis external door walkthorugh
@@ -9,7 +10,6 @@
 - tardis systems
 
 # blocks to add
-- foam pipes
 - tungsten plate
 - tungsten plate stairs
 - tungsten plate slabs
