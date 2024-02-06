@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "light=0":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=1":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=2":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=3":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=4":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=5":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=6":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=7":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=8":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=9":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=10":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=11":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=12":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=13":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=14":  { "model": "unknown_traveler:block/roundel/magenta_concrete" },
+    "light=15":  { "model": "unknown_traveler:block/roundel/magenta_concrete" }
+  }
+}

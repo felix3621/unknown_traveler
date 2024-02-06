@@ -8,7 +8,9 @@ import io.github.felix3621.unknown_traveler.item.ModItems;
 import io.github.felix3621.unknown_traveler.network.Network;
 import io.github.felix3621.unknown_traveler.world.WorldRegistry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,7 +24,7 @@ public class UnknownTraveler {
     public static final String MODID = "unknown_traveler";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final ResourceLocation ATLAS_LOC = new ResourceLocation(UnknownTraveler.MODID, "atlas");
+    public static final ResourceLocation TARDIS_LOC = new ResourceLocation(UnknownTraveler.MODID, "tardis");
 
     public UnknownTraveler() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

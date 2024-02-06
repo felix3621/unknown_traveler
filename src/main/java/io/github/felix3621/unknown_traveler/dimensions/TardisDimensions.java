@@ -2,10 +2,12 @@ package io.github.felix3621.unknown_traveler.dimensions;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Lifecycle;
+import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.network.Network;
 import io.github.felix3621.unknown_traveler.network.packets.SyncDimensionListMessage;
 import io.github.felix3621.unknown_traveler.world.TardisChunkGenerator;
 import net.minecraft.core.MappedRegistry;
+import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -15,6 +17,7 @@ import net.minecraft.server.level.progress.ChunkProgressListener;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.level.border.BorderChangeListener;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.storage.DerivedLevelData;
 import net.minecraft.world.level.storage.LevelStorageSource;
@@ -27,6 +30,9 @@ import java.util.concurrent.Executor;
 import java.util.function.BiFunction;
 
 public class TardisDimensions {
+    public static class DimensionTypes {
+        public static final ResourceKey<DimensionType> TARDIS_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, UnknownTraveler.TARDIS_LOC);
+    }
     public static ServerLevel createAndRegisterDynamicWorldAndDimension(MinecraftServer server, Map<ResourceKey<Level>, ServerLevel> map, ResourceKey<Level> worldKey) {
         ServerLevel newWorld = createAndRegisterWorldAndDimension(server, map, worldKey, TardisDimensions::createTARDISStem);
         Network.sendPacketToAll(new SyncDimensionListMessage(worldKey, true));

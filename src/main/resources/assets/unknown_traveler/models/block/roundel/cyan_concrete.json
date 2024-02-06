@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "minecraft:block/cyan_concrete",
+    "roundel": "unknown_traveler:block/roundel"
+  },
+  "elements": [
+    {
+      "from": [0,0,0],
+      "to": [16,16,16],
+      "faces": {
+        "down":   {"texture": "#particle", "cullface": "down"},
+        "up":     {"texture": "#particle", "cullface": "up"},
+        "north":  {"texture": "#particle", "cullface": "north"},
+        "south":  {"texture": "#particle", "cullface": "south"},
+        "west":   {"texture": "#particle", "cullface": "west"},
+        "east":   {"texture": "#particle", "cullface": "east"}
+      }
+    },
+    {
+      "from": [0,0,0],
+      "to": [16,16,16],
+      "faces": {
+        "down":   {"texture": "#roundel", "cullface": "down"},
+        "up":     {"texture": "#roundel", "cullface": "up"},
+        "north":  {"texture": "#roundel", "cullface": "north"},
+        "south":  {"texture": "#roundel", "cullface": "south"},
+        "west":   {"texture": "#roundel", "cullface": "west"},
+        "east":   {"texture": "#roundel", "cullface": "east"}
+      }
+    }
+  ]
+}

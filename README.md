@@ -1,8 +1,29 @@
+# Added:
+- tardis exterior (clicking door will "open" and link to a new tardis dimension, if not linked)
+- custom blocks:
+  - concrete roundels
+
 # TODO:
 - tardis external door walkthorugh
 - tardis inside
 - tardis systems
 
+# blocks to add
+- foam pipes
+- tungsten plate
+- tungsten plate stairs
+- tungsten plate slabs
+- metal grate
+- metal grate stairs
+- metal grate slabs
+- tungsten
+- tungsten stairs
+- tungsten slabs
+- tungsten pipes
+- tungsten pipes slabs
+- tungsten pipes stairs
+- blinking lights
+- wire hang
 
 # Ideas
 - Tardis

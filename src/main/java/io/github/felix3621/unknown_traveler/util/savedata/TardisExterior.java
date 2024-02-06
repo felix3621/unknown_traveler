@@ -4,6 +4,7 @@ import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.block.ModBlocks;
 import io.github.felix3621.unknown_traveler.block.custom.TardisExteriorBlock;
 import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntity;
+import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntityOpen;
 import io.github.felix3621.unknown_traveler.helper.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -79,9 +80,11 @@ public class TardisExterior {
 
             if (serverWorld.dimension() == dimension) {
 
-                if (serverWorld.getBlockState(pos).getBlock() != ModBlocks.TARDIS_EXTERIOR_BLOCK.get()) {
-                    serverWorld.destroyBlock(pos, true);
-                    serverWorld.setBlock(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK.get().defaultBlockState(), 1);
+
+                if (door) {
+                    serverWorld.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK_OPEN.get().defaultBlockState());
+                } else {
+                    serverWorld.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK.get().defaultBlockState());
                 }
 
                 if (serverWorld.getBlockState(pos).getValue(BlockStateProperties.HORIZONTAL_FACING) != facing)
@@ -90,9 +93,10 @@ public class TardisExterior {
                 if (serverWorld.getBlockState(pos).getValue(TardisExteriorBlock.DoorState) != door)
                     serverWorld.setBlockAndUpdate(pos, serverWorld.getBlockState(pos).setValue(TardisExteriorBlock.DoorState, door));
 
-                TardisExteriorBlockEntity entity = (TardisExteriorBlockEntity) serverWorld.getBlockEntity(pos);
-                if (!Objects.equals(entity.getID(), id))
-                    entity.setID(id);
+                if (serverWorld.getBlockEntity(pos) instanceof TardisExteriorBlockEntity)
+                    ((TardisExteriorBlockEntity) serverWorld.getBlockEntity(pos)).setID(id);
+                else if (serverWorld.getBlockEntity(pos) instanceof TardisExteriorBlockEntityOpen)
+                    ((TardisExteriorBlockEntityOpen) serverWorld.getBlockEntity(pos)).setID(id);
             }
         }
     }

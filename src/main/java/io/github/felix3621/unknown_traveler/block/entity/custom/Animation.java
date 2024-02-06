@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Animation {
+
     private record animationElement(Boolean play, RawAnimation animation) {}
 
     private final Map<String, animationElement> animationList;
@@ -15,11 +16,20 @@ public class Animation {
         this.animationList = new HashMap<>();
     }
 
-    public void registerAnimation(String name, RawAnimation animation, Boolean instantStart) {
-        this.animationList.put(name, new animationElement(instantStart, animation));
+    public void registerAnimation(String name, RawAnimation animation) {
+        this.animationList.put(name, new animationElement(false, animation));
     }
 
-    public <E extends TardisExteriorBlockEntity> void animationTick(AnimationState<E> state) {
+    public <E extends TardisExteriorBlockEntity> void TEBEanimationTick(AnimationState<E> state) {
+        for (Map.Entry<String, animationElement> entry : this.animationList.entrySet()) {
+            if (entry.getValue().play) {
+                playAnimation(state, entry.getValue().animation());
+                this.animationList.put(entry.getKey(), new animationElement(false, entry.getValue().animation()));
+            }
+        }
+    }
+
+    public <E extends TardisExteriorBlockEntityOpen> void TEBEOanimationTick(AnimationState<E> state) {
         for (Map.Entry<String, animationElement> entry : this.animationList.entrySet()) {
             if (entry.getValue().play) {
                 playAnimation(state, entry.getValue().animation());

@@ -1,8 +1,9 @@
 package io.github.felix3621.unknown_traveler.block.custom;
 
-import io.github.felix3621.unknown_traveler.block.BlockProperties;
+import io.github.felix3621.unknown_traveler.block.ModBlocks;
 import io.github.felix3621.unknown_traveler.block.entity.ModBlockEntities;
 import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntity;
+import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntityOpen;
 import io.github.felix3621.unknown_traveler.helper.TardisHelper;
 import io.github.felix3621.unknown_traveler.util.savedata.TardisExterior;
 import io.github.felix3621.unknown_traveler.util.savedata.TardisID;
@@ -13,7 +14,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,14 +22,16 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
+import static io.github.felix3621.unknown_traveler.block.BlockProperties.FACING;
+
 public class TardisExteriorBlock extends BaseEntityBlock {
     public static final BooleanProperty DoorState = BooleanProperty.create("door");
-    private BlockEntity BE;
-    private TardisExteriorBlockEntity TEBE;
+    public static final BooleanProperty SpawnAnimation = BooleanProperty.create("spawn_animation");
     public TardisExteriorBlock(Properties properties) {
         super(properties);
 
         this.registerDefaultState(this.stateDefinition.any().setValue(DoorState, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(SpawnAnimation, false));
     }
 
     @Override
@@ -39,12 +41,12 @@ public class TardisExteriorBlock extends BaseEntityBlock {
 
         if(!level.isClientSide){
             level.getServer().execute(() -> {
-                Direction DIRECTION = state.getValue(BlockProperties.FACING);
+                Direction DIRECTION = state.getValue(FACING);
                 boolean create = false;
-                Integer ID = this.TEBE.getID();
+                Integer ID = ((TardisExteriorBlockEntity) level.getBlockEntity(pos)).getID();
                 if (ID == -1) {
                     ID = TardisID.getID();
-                    this.TEBE.setID(ID);
+                    ((TardisExteriorBlockEntity) level.getBlockEntity(pos)).setID(ID);
                     create = true;
                 }
                 ServerLevel dim = TardisHelper.getTardisDim(level.getServer(), ID.toString());
@@ -53,12 +55,10 @@ public class TardisExteriorBlock extends BaseEntityBlock {
                 }
 
                 if (state.getValue(DoorState)) {
-                    level.setBlock(pos, state.setValue(DoorState, false), 3);
-                    this.TEBE.closeDoorAnimation();
+                    level.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK.get().defaultBlockState());
                     TardisExterior.close(ID);
                 } else {
-                    level.setBlock(pos, state.setValue(DoorState, true), 3);
-                    this.TEBE.openDoorAnimation();
+                    level.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK_OPEN.get().defaultBlockState());
                     TardisExterior.open(ID);
                 }
             });
@@ -69,25 +69,24 @@ public class TardisExteriorBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        this.BE = ModBlockEntities.TARDIS_EXTERIOR_BLOCK_ENTITY.get().create(pPos, pState);
-        this.TEBE = ((TardisExteriorBlockEntity) this.BE);
-        return this.BE;
+        return ModBlockEntities.TARDIS_EXTERIOR_BLOCK_ENTITY.get().create(pPos, pState);
     }
 
     @Override
     public BlockState rotate(BlockState pState, Rotation pRotation) {
-        return pState.setValue(BlockProperties.FACING, pRotation.rotate(pState.getValue(BlockProperties.FACING)));
+        return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState pState, Mirror pMirror) {
-        return pState.rotate(pMirror.getRotation(pState.getValue(BlockProperties.FACING)));
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(BlockProperties.FACING);
+        pBuilder.add(FACING);
         pBuilder.add(DoorState);
+        pBuilder.add(SpawnAnimation);
     }
 
     @Override
