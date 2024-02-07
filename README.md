@@ -7,6 +7,10 @@
     - block
     - slab
     - stairs
+  - tungsten
+    - block
+    - slab
+    - stairs
 
 # TODO:
 - tardis external door walkthorugh
@@ -17,9 +21,6 @@
 - tungsten plate
 - tungsten plate stairs
 - tungsten plate slabs
-- tungsten
-- tungsten stairs
-- tungsten slabs
 - tungsten pipes
 - tungsten pipes slabs
 - tungsten pipes stairs

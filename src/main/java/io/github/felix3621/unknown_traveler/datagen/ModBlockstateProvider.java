@@ -89,5 +89,79 @@ public class ModBlockstateProvider extends BlockStateProvider {
                         modLoc("block/metal_grate/stairs_straight")
                 )
         );
+
+        simpleBlock(
+                ModBlocks.TUNGSTEN.get(),
+                models().cubeAll(
+                        "block/tungsten/block",
+                        modLoc("block/tungsten")
+                )
+        );
+
+        simpleBlockItem(
+                ModBlocks.TUNGSTEN.get(),
+                models().withExistingParent(
+                        "item/tungsten/block",
+                        modLoc("block/tungsten/block")
+                )
+        );
+
+        slabBlock(
+                ModBlocks.TUNGSTEN_SLAB.get(),
+                models().slab(
+                        "block/tungsten/slab_bottom",
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten")
+                ),
+                models().slabTop(
+                        "block/tungsten/slab_top",
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten")
+                ),
+                models().withExistingParent(
+                        "block/tungsten/slab_double",
+                        modLoc("block/tungsten/block")
+                )
+        );
+
+        simpleBlockItem(
+                ModBlocks.TUNGSTEN_SLAB.get(),
+                models().withExistingParent(
+                        "item/tungsten/slab",
+                        modLoc("block/tungsten/slab_bottom")
+                )
+        );
+
+        stairsBlock(
+                ModBlocks.TUNGSTEN_STAIRS.get(),
+                models().stairs(
+                        "block/tungsten/stairs_straight",
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten")
+                ),
+                models().stairsInner(
+                        "block/tungsten/stairs_inner",
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten")
+                ),
+                models().stairsOuter(
+                        "block/tungsten/stairs_outer",
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten"),
+                        modLoc("block/tungsten")
+                )
+        );
+
+        simpleBlockItem(
+                ModBlocks.TUNGSTEN_STAIRS.get(),
+                models().withExistingParent(
+                        "item/tungsten/stairs",
+                        modLoc("block/tungsten/stairs_straight")
+                )
+        );
     }
 }
