@@ -3,6 +3,10 @@ package io.github.felix3621.unknown_traveler.datagen;
 import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.block.ModBlocks;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -21,290 +25,203 @@ public class ModBlockstateProvider extends BlockStateProvider {
                 )
         );
 
-        simpleBlock(
+        generateBasicSet(
                 ModBlocks.METAL_GRATE.get(),
-                models().cubeAll(
-                        "block/metal_grate/block",
-                        modLoc("block/metal_grate")
-                )
-        );
-        simpleBlockItem(
-                ModBlocks.METAL_GRATE.get(),
-                models().withExistingParent(
-                        "item/metal_grate/block",
-                        modLoc("block/metal_grate/block")
-                )
-        );
-
-        slabBlock(
                 ModBlocks.METAL_GRATE_SLAB.get(),
-                models().slab(
-                        "block/metal_grate/slab_bottom",
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate")
-                ),
-                models().slabTop(
-                        "block/metal_grate/slab_top",
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate")
-                ),
-                models().withExistingParent(
-                        "block/metal_grate/slab_double",
-                        modLoc("block/metal_grate/block")
-                )
-        );
-        simpleBlockItem(
-                ModBlocks.METAL_GRATE_SLAB.get(),
-                models().withExistingParent(
-                        "item/metal_grate/slab",
-                        modLoc("block/metal_grate/slab_bottom")
-                )
-        );
-
-        stairsBlock(
                 ModBlocks.METAL_GRATE_STAIRS.get(),
-                models().stairs(
-                        "block/metal_grate/stairs_straight",
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate")
-                ),
-                models().stairsInner(
-                        "block/metal_grate/stairs_inner",
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate")
-                ),
-                models().stairsOuter(
-                        "block/metal_grate/stairs_outer",
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate"),
-                        modLoc("block/metal_grate")
-                )
+                "metal_grate",
+                modLoc("block/metal_grate")
         );
-        simpleBlockItem(
-                ModBlocks.METAL_GRATE_STAIRS.get(),
-                models().withExistingParent(
-                        "item/metal_grate/stairs",
-                        modLoc("block/metal_grate/stairs_straight")
-                )
-        );
-
-        simpleBlock(
+        generateBasicSet(
                 ModBlocks.TUNGSTEN.get(),
-                models().cubeAll(
-                        "block/tungsten/block",
-                        modLoc("block/tungsten")
-                )
-        );
-        simpleBlockItem(
-                ModBlocks.TUNGSTEN.get(),
-                models().withExistingParent(
-                        "item/tungsten/block",
-                        modLoc("block/tungsten/block")
-                )
-        );
-
-        slabBlock(
                 ModBlocks.TUNGSTEN_SLAB.get(),
-                models().slab(
-                        "block/tungsten/slab_bottom",
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
-                ),
-                models().slabTop(
-                        "block/tungsten/slab_top",
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
-                ),
-                models().withExistingParent(
-                        "block/tungsten/slab_double",
-                        modLoc("block/tungsten/block")
-                )
-        );
-        simpleBlockItem(
-                ModBlocks.TUNGSTEN_SLAB.get(),
-                models().withExistingParent(
-                        "item/tungsten/slab",
-                        modLoc("block/tungsten/slab_bottom")
-                )
-        );
-
-        stairsBlock(
                 ModBlocks.TUNGSTEN_STAIRS.get(),
-                models().stairs(
-                        "block/tungsten/stairs_straight",
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
-                ),
-                models().stairsInner(
-                        "block/tungsten/stairs_inner",
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
-                ),
-                models().stairsOuter(
-                        "block/tungsten/stairs_outer",
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
-                )
+                "tungsten",
+                modLoc("block/tungsten")
         );
-        simpleBlockItem(
-                ModBlocks.TUNGSTEN_STAIRS.get(),
-                models().withExistingParent(
-                        "item/tungsten/stairs",
-                        modLoc("block/tungsten/stairs_straight")
-                )
-        );
-
-        simpleBlock(
+        generateBasicSet(
                 ModBlocks.TUNGSTEN_PLATE.get(),
-                models().cubeAll(
-                        "block/tungsten_plate/block",
-                        modLoc("block/tungsten_plate")
-                )
-        );
-        simpleBlockItem(
-                ModBlocks.TUNGSTEN_PLATE.get(),
-                models().withExistingParent(
-                        "item/tungsten_plate/block",
-                        modLoc("block/tungsten_plate/block")
-                )
-        );
-
-        slabBlock(
                 ModBlocks.TUNGSTEN_PLATE_SLAB.get(),
-                models().slab(
-                        "block/tungsten_plate/slab_bottom",
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate")
-                ),
-                models().slabTop(
-                        "block/tungsten_plate/slab_top",
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate")
-                ),
-                models().withExistingParent(
-                        "block/tungsten_plate/slab_double",
-                        modLoc("block/tungsten_plate/block")
-                )
-        );
-        simpleBlockItem(
-                ModBlocks.TUNGSTEN_PLATE_SLAB.get(),
-                models().withExistingParent(
-                        "item/tungsten_plate/slab",
-                        modLoc("block/tungsten_plate/slab_bottom")
-                )
-        );
-
-        stairsBlock(
                 ModBlocks.TUNGSTEN_PLATE_STAIRS.get(),
-                models().stairs(
-                        "block/tungsten_plate/stairs_straight",
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate")
-                ),
-                models().stairsInner(
-                        "block/tungsten_plate/stairs_inner",
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate")
-                ),
-                models().stairsOuter(
-                        "block/tungsten_plate/stairs_outer",
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate"),
-                        modLoc("block/tungsten_plate")
-                )
+                "tungsten_plate",
+                modLoc("block/tungsten_plate")
         );
-        simpleBlockItem(
-                ModBlocks.TUNGSTEN_PLATE_STAIRS.get(),
-                models().withExistingParent(
-                        "item/tungsten_plate/stairs",
-                        modLoc("block/tungsten_plate/stairs_straight")
-                )
-        );
-
-        simpleBlock(
+        generateBasicSet(
                 ModBlocks.TUNGSTEN_PIPES.get(),
+                ModBlocks.TUNGSTEN_PIPES_SLAB.get(),
+                ModBlocks.TUNGSTEN_PIPES_STAIRS.get(),
+                "tungsten_pipes",
+                modLoc("block/tungsten_pipes"),
+                modLoc("block/tungsten")
+        );
+
+        simpleBlock(ModBlocks.BLINKING_LIGHTS.get());
+        simpleBlockItem(
+                ModBlocks.BLINKING_LIGHTS.get(),
+                models().getExistingFile(
+                        modLoc("block/blinking_lights")
+                )
+        );
+    }
+
+    private void generateBasicBlock(Block block, String position, ResourceLocation texture) {
+        simpleBlock(block,
+                models().cubeAll(
+                        "block/"+position+"/block",
+                        texture
+                )
+        );
+        simpleBlockItem(block,
+                models().withExistingParent(
+                        "item/"+position+"/block",
+                        modLoc("block/"+position+"/block")
+                )
+        );
+    }
+    private void generateBasicBlock(Block block, String position, ResourceLocation side, ResourceLocation topbottom) {
+        simpleBlock(
+                block,
                 models().cubeBottomTop(
-                        "block/tungsten_pipes/block",
-                        modLoc("block/tungsten_pipes"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
+                        "block/"+position+"/block",
+                        side,
+                        topbottom,
+                        topbottom
                 )
         );
         simpleBlockItem(
-                ModBlocks.TUNGSTEN_PIPES.get(),
+                block,
                 models().withExistingParent(
-                        "item/tungsten_pipes/block",
-                        modLoc("block/tungsten_pipes/block")
+                        "item/"+position+"/block",
+                        modLoc("block/"+position+"/block")
                 )
         );
+    }
 
-        slabBlock(
-                ModBlocks.TUNGSTEN_PIPES_SLAB.get(),
+    private void generateBasicStairs(StairBlock stairBlock, String position, ResourceLocation texture) {
+        stairsBlock(
+                stairBlock,
+                models().stairs(
+                        "block/"+position+"/stairs_straight",
+                        texture,
+                        texture,
+                        texture
+                ),
+                models().stairsInner(
+                        "block/"+position+"/stairs_inner",
+                        texture,
+                        texture,
+                        texture
+                ),
+                models().stairsOuter(
+                        "block/"+position+"/stairs_outer",
+                        texture,
+                        texture,
+                        texture
+                )
+        );
+        simpleBlockItem(
+                stairBlock,
+                models().withExistingParent(
+                        "item/"+position+"/stairs",
+                        modLoc("block/"+position+"/stairs_straight")
+                )
+        );
+    }
+    private void generateBasicStairs(StairBlock stairBlock, String position, ResourceLocation side, ResourceLocation topbottom) {
+        stairsBlock(
+                stairBlock,
+                models().stairs(
+                        "block/"+position+"/stairs_straight",
+                        side,
+                        topbottom,
+                        topbottom
+                ),
+                models().stairsInner(
+                        "block/"+position+"/stairs_inner",
+                        side,
+                        topbottom,
+                        topbottom
+                ),
+                models().stairsOuter(
+                        "block/"+position+"/stairs_outer",
+                        side,
+                        topbottom,
+                        topbottom
+                )
+        );
+        simpleBlockItem(
+                stairBlock,
+                models().withExistingParent(
+                        "item/"+position+"/stairs",
+                        modLoc("block/"+position+"/stairs_straight")
+                )
+        );
+    }
+
+    private void generateBasicSlab(SlabBlock slabBlock, String position, ResourceLocation texture) {
+        slabBlock(slabBlock,
                 models().slab(
-                        "block/tungsten_pipes/slab_bottom",
-                        modLoc("block/tungsten_pipes"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
+                        "block/"+position+"/slab_bottom",
+                        texture,
+                        texture,
+                        texture
                 ),
                 models().slabTop(
-                        "block/tungsten_pipes/slab_top",
-                        modLoc("block/tungsten_pipes"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
+                        "block/"+position+"/slab_top",
+                        texture,
+                        texture,
+                        texture
                 ),
                 models().withExistingParent(
-                        "block/tungsten_pipes/slab_double",
-                        modLoc("block/tungsten_pipes/block")
+                        "block/"+position+"/slab_double",
+                        modLoc("block/"+position+"/block")
                 )
         );
         simpleBlockItem(
-                ModBlocks.TUNGSTEN_PIPES_SLAB.get(),
+                slabBlock,
+                models().withExistingParent(
+                        "item/"+position+"/slab",
+                        modLoc("block/"+position+"/slab_bottom")
+                )
+        );
+    }
+    private void generateBasicSlab(SlabBlock slabBlock, String position, ResourceLocation side, ResourceLocation topbottom) {
+        slabBlock(
+                slabBlock,
+                models().slab(
+                        "block/"+position+"/slab_bottom",
+                        side,
+                        topbottom,
+                        topbottom
+                ),
+                models().slabTop(
+                        "block/"+position+"/slab_top",
+                        side,
+                        topbottom,
+                        topbottom
+                ),
+                models().withExistingParent(
+                        "block/"+position+"/slab_double",
+                        modLoc("block/"+position+"/block")
+                )
+        );
+        simpleBlockItem(
+                slabBlock,
                 models().withExistingParent(
                         "item/tungsten_pipes/slab",
                         modLoc("block/tungsten_pipes/slab_bottom")
                 )
         );
+    }
 
-        stairsBlock(
-                ModBlocks.TUNGSTEN_PIPES_STAIRS.get(),
-                models().stairs(
-                        "block/tungsten_pipes/stairs_straight",
-                        modLoc("block/tungsten_pipes"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
-                ),
-                models().stairsInner(
-                        "block/tungsten_pipes/stairs_inner",
-                        modLoc("block/tungsten_pipes"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
-                ),
-                models().stairsOuter(
-                        "block/tungsten_pipes/stairs_outer",
-                        modLoc("block/tungsten_pipes"),
-                        modLoc("block/tungsten"),
-                        modLoc("block/tungsten")
-                )
-        );
-        simpleBlockItem(
-                ModBlocks.TUNGSTEN_PIPES_STAIRS.get(),
-                models().withExistingParent(
-                        "item/tungsten_pipes/stairs",
-                        modLoc("block/tungsten_pipes/stairs_straight")
-                )
-        );
+    private void generateBasicSet(Block block, SlabBlock slabBlock, StairBlock stairBlock, String position, ResourceLocation texture) {
+        generateBasicBlock(block, position, texture);
+        generateBasicSlab(slabBlock, position, texture);
+        generateBasicStairs(stairBlock, position, texture);
+    }
+    private void generateBasicSet(Block block, SlabBlock slabBlock, StairBlock stairBlock, String position, ResourceLocation side, ResourceLocation topbottom) {
+        generateBasicBlock(block, position, side, topbottom);
+        generateBasicSlab(slabBlock, position, side, topbottom);
+        generateBasicStairs(stairBlock, position, side, topbottom);
     }
 }

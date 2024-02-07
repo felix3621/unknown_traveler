@@ -19,6 +19,7 @@
     - block
     - slab
     - stairs
+  - blinking lights
 
 # TODO:
 - tardis external door walkthorugh
@@ -26,7 +27,6 @@
 - tardis systems
 
 # blocks to add
-- blinking lights
 - wire hang
 
 # Ideas
