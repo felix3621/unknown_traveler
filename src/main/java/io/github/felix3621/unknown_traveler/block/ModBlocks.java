@@ -83,6 +83,15 @@ public class ModBlocks {
             () -> new StairBlock(() -> TUNGSTEN.get().defaultBlockState(),
                     BlockBehaviour.Properties.copy(TUNGSTEN.get())));
 
+    public static final RegistryObject<Block> TUNGSTEN_PLATE = registerBlock("tungsten_plate/block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .sound(SoundType.STONE).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
+    public static final RegistryObject<SlabBlock> TUNGSTEN_PLATE_SLAB = registerBlock("tungsten_plate/slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(TUNGSTEN_PLATE.get())));
+    public static final RegistryObject<StairBlock> TUNGSTEN_PLATE_STAIRS = registerBlock("tungsten_plate/stairs",
+            () -> new StairBlock(() -> TUNGSTEN_PLATE.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(TUNGSTEN_PLATE.get())));
+
 
     private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
         return BLOCKS.register(name, block);
