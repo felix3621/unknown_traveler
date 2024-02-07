@@ -15,6 +15,10 @@
     - block
     - slab
     - stairs
+  - tungsten pipes
+    - block
+    - slab
+    - stairs
 
 # TODO:
 - tardis external door walkthorugh
@@ -22,9 +26,6 @@
 - tardis systems
 
 # blocks to add
-- tungsten pipes
-- tungsten pipes slabs
-- tungsten pipes stairs
 - blinking lights
 - wire hang
 

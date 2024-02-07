@@ -92,6 +92,14 @@ public class ModBlocks {
             () -> new StairBlock(() -> TUNGSTEN_PLATE.get().defaultBlockState(),
                     BlockBehaviour.Properties.copy(TUNGSTEN_PLATE.get())));
 
+    public static final RegistryObject<Block> TUNGSTEN_PIPES = registerBlock("tungsten_pipes/block",
+            () -> new Block(BlockBehaviour.Properties.copy(TUNGSTEN.get())));
+    public static final RegistryObject<SlabBlock> TUNGSTEN_PIPES_SLAB = registerBlock("tungsten_pipes/slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(TUNGSTEN_PIPES.get())));
+    public static final RegistryObject<StairBlock> TUNGSTEN_PIPES_STAIRS = registerBlock("tungsten_pipes/stairs",
+            () -> new StairBlock(() -> TUNGSTEN_PIPES.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(TUNGSTEN_PIPES.get())));
+
 
     private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
         return BLOCKS.register(name, block);
