@@ -4,6 +4,9 @@
   - concrete roundels
   - foam pipes
   - metal grate
+    - block
+    - slab
+    - stairs
 
 # TODO:
 - tardis external door walkthorugh
@@ -14,8 +17,6 @@
 - tungsten plate
 - tungsten plate stairs
 - tungsten plate slabs
-- metal grate stairs
-- metal grate slabs
 - tungsten
 - tungsten stairs
 - tungsten slabs

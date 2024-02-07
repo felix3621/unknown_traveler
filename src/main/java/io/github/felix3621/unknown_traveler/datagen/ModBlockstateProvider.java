@@ -31,5 +31,63 @@ public class ModBlockstateProvider extends BlockStateProvider {
                         modLoc("block/metal_grate/block")
                 )
         );
+
+        slabBlock(
+                ModBlocks.METAL_GRATE_SLAB.get(),
+                models().slab(
+                        "block/metal_grate/slab_bottom",
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate")
+                ),
+                models().slabTop(
+                        "block/metal_grate/slab_top",
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate")
+                ),
+                models().withExistingParent(
+                        "block/metal_grate/slab_double",
+                        modLoc("block/metal_grate/block")
+                )
+        );
+
+        simpleBlockItem(
+                ModBlocks.METAL_GRATE_SLAB.get(),
+                models().withExistingParent(
+                        "item/metal_grate/slab",
+                        modLoc("block/metal_grate/slab_bottom")
+                )
+        );
+
+        stairsBlock(
+                ModBlocks.METAL_GRATE_STAIRS.get(),
+                models().stairs(
+                        "block/metal_grate/stairs_straight",
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate")
+                ),
+                models().stairsInner(
+                        "block/metal_grate/stairs_inner",
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate")
+                ),
+                models().stairsOuter(
+                        "block/metal_grate/stairs_outer",
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate"),
+                        modLoc("block/metal_grate")
+                )
+        );
+
+        simpleBlockItem(
+                ModBlocks.METAL_GRATE_STAIRS.get(),
+                models().withExistingParent(
+                        "item/metal_grate/stairs",
+                        modLoc("block/metal_grate/stairs_straight")
+                )
+        );
     }
 }

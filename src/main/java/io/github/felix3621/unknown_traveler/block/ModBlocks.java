@@ -68,10 +68,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> METAL_GRATE = registerBlock("metal_grate/block",
             () -> new Block(BlockBehaviour.Properties.of(Material.HEAVY_METAL).noOcclusion()
                     .sound(SoundType.LANTERN).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> METAL_GRATE_SLAB = registerBlock("metal_grate/slab",
+    public static final RegistryObject<SlabBlock> METAL_GRATE_SLAB = registerBlock("metal_grate/slab",
             () -> new SlabBlock(BlockBehaviour.Properties.of(Material.HEAVY_METAL).noOcclusion()
                     .sound(SoundType.LANTERN).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> METAL_GRATE_STAIRs = registerBlock("metal_grate/stairs",
+    public static final RegistryObject<StairBlock> METAL_GRATE_STAIRS = registerBlock("metal_grate/stairs",
             () -> new StairBlock(ModBlocks.METAL_GRATE.get().defaultBlockState(),
                     BlockBehaviour.Properties.of(Material.HEAVY_METAL).noOcclusion()
                     .sound(SoundType.LANTERN).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));

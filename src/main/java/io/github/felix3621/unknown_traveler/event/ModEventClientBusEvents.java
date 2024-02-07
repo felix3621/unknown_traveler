@@ -48,5 +48,7 @@ public class ModEventClientBusEvents {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLACK_CONCRETE_ROUNDEL.get(), RenderType.cutout());
 
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.METAL_GRATE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.METAL_GRATE_SLAB.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.METAL_GRATE_STAIRS.get(), RenderType.cutout());
     }
 }
