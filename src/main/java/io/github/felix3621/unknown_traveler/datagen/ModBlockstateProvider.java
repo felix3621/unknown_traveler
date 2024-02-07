@@ -62,6 +62,19 @@ public class ModBlockstateProvider extends BlockStateProvider {
                         modLoc("block/blinking_lights")
                 )
         );
+
+        simpleBlock(
+                ModBlocks.HANGING_WIRES.get(),
+                models().cross(
+                        "block/hanging_wires",
+                        modLoc("block/hanging_wires")
+                ));
+        simpleBlockItem(
+                ModBlocks.HANGING_WIRES.get(),
+                models().getExistingFile(
+                        modLoc("block/hanging_wires")
+                )
+        );
     }
 
     private void generateBasicBlock(Block block, String position, ResourceLocation texture) {

@@ -50,5 +50,7 @@ public class ModEventClientBusEvents {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.METAL_GRATE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.METAL_GRATE_SLAB.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.METAL_GRATE_STAIRS.get(), RenderType.cutout());
+
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.HANGING_WIRES.get(), RenderType.cutout());
     }
 }

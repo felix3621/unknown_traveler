@@ -2,6 +2,7 @@ package io.github.felix3621.unknown_traveler.block;
 
 import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.block.custom.LightBlock;
+import io.github.felix3621.unknown_traveler.block.custom.NoCollisionBlock;
 import io.github.felix3621.unknown_traveler.block.custom.TardisExteriorBlock;
 import io.github.felix3621.unknown_traveler.block.custom.TardisExteriorBlockOpen;
 import io.github.felix3621.unknown_traveler.item.ModItems;
@@ -102,6 +103,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLINKING_LIGHTS = registerBlock("blinking_lights",
             () -> new Block(BlockBehaviour.Properties.of(Material.HEAVY_METAL)
                     .sound(SoundType.METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(val -> 15)));
+
+    public static final RegistryObject<Block> HANGING_WIRES = registerBlock("hanging_wires",
+            () -> new NoCollisionBlock(BlockBehaviour.Properties.of(Material.HEAVY_METAL)
+                    .strength(5F).requiresCorrectToolForDrops().noOcclusion()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
