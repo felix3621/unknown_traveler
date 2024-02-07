@@ -69,12 +69,19 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.HEAVY_METAL).noOcclusion()
                     .sound(SoundType.LANTERN).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
     public static final RegistryObject<SlabBlock> METAL_GRATE_SLAB = registerBlock("metal_grate/slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.of(Material.HEAVY_METAL).noOcclusion()
-                    .sound(SoundType.LANTERN).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(METAL_GRATE.get())));
     public static final RegistryObject<StairBlock> METAL_GRATE_STAIRS = registerBlock("metal_grate/stairs",
-            () -> new StairBlock(ModBlocks.METAL_GRATE.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of(Material.HEAVY_METAL).noOcclusion()
-                    .sound(SoundType.LANTERN).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
+            () -> new StairBlock(() -> METAL_GRATE.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(METAL_GRATE.get())));
+
+    public static final RegistryObject<Block> TUNGSTEN = registerBlock("tungsten/block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .sound(SoundType.STONE).strength(1.25F, 4.2F).requiresCorrectToolForDrops()));
+    public static final RegistryObject<SlabBlock> TUNGSTEN_SLAB = registerBlock("tungsten/slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(TUNGSTEN.get())));
+    public static final RegistryObject<StairBlock> TUNGSTEN_STAIRS = registerBlock("tungsten/stairs",
+            () -> new StairBlock(() -> TUNGSTEN.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(TUNGSTEN.get())));
 
 
     private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
