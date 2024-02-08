@@ -1,8 +1,0 @@
-{
-  "unknown_traveler.test": "Unknown traveler test command: %s",
-  "command.unknown_traveler.error.tardis_dim": "You need to be in a tardis to execute this command",
-  "command.unknown_traveler.error.capability": "An error with the capability occurred",
-
-  "command.unknown_traveler.light.set":  "The light level in this tardis is now set to %s",
-  "command.unknown_traveler.light.check":  "The light level in this tardis is %s"
-}

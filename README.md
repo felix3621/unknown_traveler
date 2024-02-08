@@ -20,14 +20,12 @@
     - slab
     - stairs
   - blinking lights
+  - wire hang
 
 # TODO:
 - tardis external door walkthorugh
 - tardis inside
 - tardis systems
-
-# blocks to add
-- wire hang
 
 # Ideas
 - Tardis

@@ -23,5 +23,9 @@ public class generators {
                 event.includeClient(),
                 (DataProvider.Factory<ModBlockstateProvider>) output -> new ModBlockstateProvider(output, existingFileHelper)
         );
+        generator.addProvider(
+                event.includeClient(),
+                (DataProvider.Factory<ModLanguageProvider>) ModLanguageProvider::new
+        );
     }
 }
