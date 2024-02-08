@@ -1,5 +1,6 @@
 # Added:
-- tardis exterior (clicking door will "open" and link to a new tardis dimension, if not linked)
+- tardis exterior
+- tardis inside
 - custom blocks:
   - concrete roundels
   - foam pipes
@@ -23,8 +24,7 @@
   - wire hang
 
 # TODO:
-- tardis external door walkthorugh
-- tardis inside
+- tardis door walkthorugh
 - tardis systems
 
 # Ideas

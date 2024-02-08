@@ -1,5 +1,6 @@
 package io.github.felix3621.unknown_traveler.block.custom;
 
+import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.block.ModBlocks;
 import io.github.felix3621.unknown_traveler.block.entity.ModBlockEntities;
 import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntity;
@@ -9,6 +10,7 @@ import io.github.felix3621.unknown_traveler.util.savedata.TardisExterior;
 import io.github.felix3621.unknown_traveler.util.savedata.TardisID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -20,6 +22,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,15 +58,13 @@ public class TardisExteriorBlockOpen extends BaseEntityBlock {
                 ServerLevel dim = TardisHelper.getTardisDim(level.getServer(), ID.toString());
                 if (create) {
                     TardisExterior.place(level.getServer().getLevel(level.dimension()), pos, DIRECTION, ID);
+
+                    StructureTemplate structure = level.getServer().getStructureManager().getOrCreate(new ResourceLocation(UnknownTraveler.MODID, "tardis/ball"));
+                    structure.placeInWorld(dim, new BlockPos(-15, -15, -15), new BlockPos(-15, -15, -15), new StructurePlaceSettings().setIgnoreEntities(false), level.random, 3);
                 }
 
-                if (state.getValue(DoorState)) {
-                    level.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK.get().defaultBlockState());
-                    TardisExterior.close(ID);
-                } else {
-                    level.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK_OPEN.get().defaultBlockState());
-                    TardisExterior.open(ID);
-                }
+                level.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK.get().defaultBlockState());
+                TardisExterior.close(ID);
             });
         }
         return InteractionResult.SUCCESS;
