@@ -1,6 +1,7 @@
 # Added:
 - tardis exterior
 - tardis inside
+- tardis door (walk through)
 - custom blocks:
   - concrete roundels
   - foam pipes
@@ -24,7 +25,6 @@
   - wire hang
 
 # TODO:
-- tardis door walkthorugh
 - tardis systems
 
 # Ideas

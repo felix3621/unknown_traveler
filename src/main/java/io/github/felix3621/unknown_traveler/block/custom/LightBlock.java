@@ -21,7 +21,7 @@ public class LightBlock extends Block {
     public void onPlace(BlockState p_60566_, Level pLevel, BlockPos pPos, BlockState p_60569_, boolean p_60570_) {
         if (!pLevel.isClientSide) {
             pLevel.getServer().tell(new TickTask(1, () -> {
-                ILightCapability cap = pLevel.getCapability(Capabilities.TARDIS_DIM).orElse(null);
+                ILightCapability cap = pLevel.getCapability(Capabilities.TARDIS_LIGHT_CAP).orElse(null);
                 if (cap != null) {
                     cap.addLightPos(pPos);
                 }

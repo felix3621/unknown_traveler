@@ -4,13 +4,16 @@ import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.block.ModBlocks;
 import io.github.felix3621.unknown_traveler.block.entity.ModBlockEntities;
 import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntity;
-import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntityOpen;
 import io.github.felix3621.unknown_traveler.helper.TardisHelper;
-import io.github.felix3621.unknown_traveler.util.savedata.TardisExterior;
+import io.github.felix3621.unknown_traveler.util.capabilities.Capabilities;
+import io.github.felix3621.unknown_traveler.util.capabilities.door.IDoorCapability;
+import io.github.felix3621.unknown_traveler.util.capabilities.light.ILightCapability;
+import io.github.felix3621.unknown_traveler.util.savedata.TardisPlacements;
 import io.github.felix3621.unknown_traveler.util.savedata.TardisID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -30,13 +33,13 @@ import static io.github.felix3621.unknown_traveler.block.BlockProperties.FACING;
 
 public class TardisExteriorBlock extends BaseEntityBlock {
     private static final BlockPos tardis_ball_offset = new BlockPos(-14, -12, -14);
-    
-    public static final BooleanProperty DoorState = BooleanProperty.create("door");
+    public static final BlockPos tardis_ball_door_position = new BlockPos(0, 1, 13);
+    public static final Direction tardis_ball_door_direction = Direction.SOUTH;
+
     public static final BooleanProperty SpawnAnimation = BooleanProperty.create("spawn_animation");
     public TardisExteriorBlock(Properties properties) {
         super(properties);
 
-        this.registerDefaultState(this.stateDefinition.any().setValue(DoorState, false));
         this.registerDefaultState(this.stateDefinition.any().setValue(SpawnAnimation, false));
     }
 
@@ -57,14 +60,24 @@ public class TardisExteriorBlock extends BaseEntityBlock {
                 }
                 ServerLevel dim = TardisHelper.getTardisDim(level.getServer(), ID.toString());
                 if (create) {
-                    TardisExterior.place(level.getServer().getLevel(level.dimension()), pos, DIRECTION, ID);
+                    TardisPlacements.place(level.getServer().getLevel(level.dimension()), pos, DIRECTION, ID);
 
                     StructureTemplate structure = level.getServer().getStructureManager().getOrCreate(new ResourceLocation(UnknownTraveler.MODID, "tardis/ball"));
                     structure.placeInWorld(dim, tardis_ball_offset, tardis_ball_offset, new StructurePlaceSettings().setIgnoreEntities(false), level.random, 3);
+
+                    BlockState state1 = ModBlocks.TARDIS_INTERIOR_BLOCK_OPEN.get().defaultBlockState().setValue(FACING, tardis_ball_door_direction);
+
+                    dim.setBlockAndUpdate(tardis_ball_door_position, state1);
+                    dim.getServer().tell(new TickTask(1, () -> {
+                        IDoorCapability cap = dim.getCapability(Capabilities.TARDIS_DOOR_CAP).orElse(null);
+                        if (cap != null) {
+                            cap.addDoorPos(tardis_ball_door_position, state1);
+                        }
+                    }));
                 }
 
                 level.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK_OPEN.get().defaultBlockState());
-                TardisExterior.open(ID);
+                TardisPlacements.open(ID);
             });
         }
         return InteractionResult.SUCCESS;
@@ -89,7 +102,6 @@ public class TardisExteriorBlock extends BaseEntityBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING);
-        pBuilder.add(DoorState);
         pBuilder.add(SpawnAnimation);
     }
 

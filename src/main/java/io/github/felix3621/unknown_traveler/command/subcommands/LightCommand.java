@@ -15,7 +15,7 @@ import net.minecraft.network.chat.Component;
 public class LightCommand implements baseCommand{
     private static int checkLight(CommandContext<CommandSourceStack> context) {
         if (SDControl.tardis_dimensions.contains(context.getSource().getLevel().dimension())) {
-            ILightCapability cap = context.getSource().getLevel().getCapability(Capabilities.TARDIS_DIM).orElse(null);
+            ILightCapability cap = context.getSource().getLevel().getCapability(Capabilities.TARDIS_LIGHT_CAP).orElse(null);
             if (cap != null) {
                 context.getSource().sendSuccess(Component.translatable("command.unknown_traveler.light.check", cap.getLight()), true);
                 return Command.SINGLE_SUCCESS;
@@ -30,7 +30,7 @@ public class LightCommand implements baseCommand{
     }
     private static int setLight(CommandContext<CommandSourceStack> context) {
         if (SDControl.tardis_dimensions.contains(context.getSource().getLevel().dimension())) {
-            ILightCapability cap = context.getSource().getLevel().getCapability(Capabilities.TARDIS_DIM).orElse(null);
+            ILightCapability cap = context.getSource().getLevel().getCapability(Capabilities.TARDIS_LIGHT_CAP).orElse(null);
             if (cap != null) {
                 cap.setLight(IntegerArgumentType.getInteger(context, "value"));
                 context.getSource().sendSuccess(Component.translatable("command.unknown_traveler.light.set", cap.getLight()), true);

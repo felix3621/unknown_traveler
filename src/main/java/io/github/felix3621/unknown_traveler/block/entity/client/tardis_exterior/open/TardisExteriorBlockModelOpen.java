@@ -1,4 +1,4 @@
-package io.github.felix3621.unknown_traveler.block.entity.client;
+package io.github.felix3621.unknown_traveler.block.entity.client.tardis_exterior.open;
 
 import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntityOpen;

@@ -20,6 +20,19 @@ public class Animation {
         this.animationList.put(name, new animationElement(false, animation));
     }
 
+    private static void playAnimation(AnimationState state, RawAnimation animation) {
+        state.getController().forceAnimationReset();
+        state.getController().setAnimation(animation);
+    }
+
+    public void play(String name) {
+        animationElement anim = this.animationList.get(name);
+        if (anim != null) {
+            this.animationList.put(name, new animationElement(true, anim.animation()));
+        }
+    }
+
+
     public <E extends TardisExteriorBlockEntity> void TEBEanimationTick(AnimationState<E> state) {
         for (Map.Entry<String, animationElement> entry : this.animationList.entrySet()) {
             if (entry.getValue().play) {
@@ -35,18 +48,6 @@ public class Animation {
                 playAnimation(state, entry.getValue().animation());
                 this.animationList.put(entry.getKey(), new animationElement(false, entry.getValue().animation()));
             }
-        }
-    }
-
-    private static void playAnimation(AnimationState state, RawAnimation animation) {
-        state.getController().forceAnimationReset();
-        state.getController().setAnimation(animation);
-    }
-
-    public void play(String name) {
-        animationElement anim = this.animationList.get(name);
-        if (anim != null) {
-            this.animationList.put(name, new animationElement(true, anim.animation()));
         }
     }
 }

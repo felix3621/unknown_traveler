@@ -2,9 +2,9 @@ package io.github.felix3621.unknown_traveler.block.entity.custom;
 
 import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.block.BlockProperties;
-import io.github.felix3621.unknown_traveler.block.custom.TardisExteriorBlock;
-import io.github.felix3621.unknown_traveler.block.custom.TardisExteriorBlockOpen;
 import io.github.felix3621.unknown_traveler.block.entity.ModBlockEntities;
+import io.github.felix3621.unknown_traveler.helper.Helper;
+import io.github.felix3621.unknown_traveler.helper.TardisHelper;
 import io.github.felix3621.unknown_traveler.util.savedata.SDControl;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -35,37 +35,11 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-public class TardisExteriorBlockEntityOpen extends BlockEntity implements GeoAnimatable {
-    private static final float tardis_ball_spawn_x = TardisExteriorBlock.tardis_ball_door_position.getX() + 0.5F;
-    private static final float tardis_ball_spawn_y = TardisExteriorBlock.tardis_ball_door_position.getY() - 1F;
-    private static final float tardis_ball_spawn_z = TardisExteriorBlock.tardis_ball_door_position.getZ() + 0.5F;
-    private static final float tardis_ball_spawn_yaw = TardisExteriorBlock.tardis_ball_door_direction.toYRot();
-
-    private Integer ID = -1;
+public class TardisInteriorBlockEntityOpen extends BlockEntity implements GeoAnimatable {
     private final Animation animation = new Animation();
-    @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        pTag.putInt(UnknownTraveler.MODID + ":tardis_id",this.ID);
-    }
-
-    @Override
-    public void load(CompoundTag pTag) {
-        this.ID = pTag.getInt(UnknownTraveler.MODID + ":tardis_id");
-    }
-
-    public Integer getID() {
-        return this.ID;
-    }
-
-    public void setID(Integer id) {
-        this.ID = id;
-    }
-
-
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-    public TardisExteriorBlockEntityOpen(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.TARDIS_EXTERIOR_BLOCK_ENTITY_OPEN.get(), pos, state);
+    public TardisInteriorBlockEntityOpen(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.TARDIS_INTERIOR_BLOCK_ENTITY_OPEN.get(), pos, state);
 
         this.animation.registerAnimation("DEPLOY", RawAnimation.begin().thenPlay("tardis.animation.spawn"));
         this.animation.registerAnimation("REMOVE", RawAnimation.begin().thenPlay("tardis.animation.despawn"));
@@ -78,10 +52,6 @@ public class TardisExteriorBlockEntityOpen extends BlockEntity implements GeoAni
 
     protected <E extends TardisExteriorBlockEntityOpen> PlayState deployAnimController(final AnimationState<E> state) {
         this.animation.TEBEOanimationTick(state);
-
-        if (level.getBlockState(worldPosition).getValue(TardisExteriorBlockOpen.SpawnAnimation)) {
-            playSpawnAnimation();
-        }
 
         return PlayState.CONTINUE;
     }
@@ -111,29 +81,44 @@ public class TardisExteriorBlockEntityOpen extends BlockEntity implements GeoAni
         return new CompoundTag();
     }
 
-    public static void tick (Level level, BlockPos pos, BlockState state, TardisExteriorBlockEntityOpen entity) {
+    public static void tick (Level level, BlockPos pos, BlockState state, TardisInteriorBlockEntityOpen entity) {
         if (!level.isClientSide()) {
-            List<Entity> collidedEntities = new ArrayList<>();
-            switch (level.getBlockState(pos).getValue(BlockProperties.FACING)) {
-                case NORTH -> collidedEntities = level.getEntitiesOfClass(Entity.class, new AABB(pos.north()));
-                case SOUTH -> collidedEntities = level.getEntitiesOfClass(Entity.class, new AABB(pos.south()));
-                case EAST -> collidedEntities = level.getEntitiesOfClass(Entity.class, new AABB(pos.east()));
-                case WEST -> collidedEntities = level.getEntitiesOfClass(Entity.class, new AABB(pos.west()));
-            }
+            List<Entity> collidedEntities = level.getEntitiesOfClass(Entity.class, new AABB(pos));
 
-            Vec3 tardisCenter = pos.getCenter();
-            Vec3 tardisAboveCenter = pos.above().getCenter();
-            Vec3 tardisBelowCenter = pos.below().getCenter();
-
-            Direction tardisDirection = state.getValue(BlockProperties.FACING);
+            Vec3 doorCenter = pos.getCenter().relative(level.getBlockState(pos).getValue(BlockProperties.FACING), 0.5d);
+            Vec3 doorAboveCenter = pos.above().getCenter().relative(level.getBlockState(pos).getValue(BlockProperties.FACING), 0.5d);
+            Vec3 doorBellowCenter = pos.below().getCenter().relative(level.getBlockState(pos).getValue(BlockProperties.FACING), 0.5d);
 
             if (!collidedEntities.isEmpty()) {
-                final ServerLevel interior = level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(UnknownTraveler.MODID, "tardis_"+entity.ID.toString())));
-                if (interior != null) {
+                String tardisId = TardisHelper.getTardisID(level);
+                ResourceKey<Level> tardisExtDim = (ResourceKey<Level>) SDControl.tardis_exterior.get(tardisId).get("dimension");
+                BlockPos tardisExtPos = (BlockPos) SDControl.tardis_exterior.get(tardisId).get("pos");
+
+                Direction tardisDirection;
+
+                switch (SDControl.tardis_exterior.get(tardisId).get("facing").toString()) {
+                    case "south" -> tardisDirection = Direction.SOUTH;
+                    case "east" -> tardisDirection = Direction.EAST;
+                    case "west" -> tardisDirection = Direction.WEST;
+                    default -> tardisDirection = Direction.NORTH;
+                }
+
+                Direction doorDirection = state.getValue(BlockProperties.FACING);
+
+                tardisExtPos = tardisExtPos.relative(tardisDirection, 1);
+
+                final ServerLevel exteriorDim = level.getServer().getLevel(tardisExtDim);
+                if (exteriorDim != null) {
                     for (Entity entity1 : collidedEntities) {
                         Vec3 playerCenter = entity1.position();
 
-                        if (playerCenter.distanceTo(tardisCenter) <= 1d || playerCenter.distanceTo(tardisAboveCenter) <= 1d || playerCenter.distanceTo(tardisBelowCenter) <= 1d) {
+                        Direction rel = tardisDirection.getClockWise();
+
+                        if (
+                                playerCenter.distanceTo(doorCenter) <= 0.6d || playerCenter.distanceTo(doorAboveCenter) <= 0.6d || playerCenter.distanceTo(doorBellowCenter) <= 0.6d ||
+                                playerCenter.distanceTo(doorCenter.relative(rel, 0.25d)) <= 0.6d || playerCenter.distanceTo(doorAboveCenter.relative(rel, 0.25d)) <= 0.6d || playerCenter.distanceTo(doorBellowCenter.relative(rel, 0.25d)) <= 0.6d ||
+                                playerCenter.distanceTo(doorCenter.relative(rel, -0.25d)) <= 0.6d || playerCenter.distanceTo(doorAboveCenter.relative(rel, -0.25d)) <= 0.6d || playerCenter.distanceTo(doorBellowCenter.relative(rel, -0.25d)) <= 0.6d
+                        ) {
                             Set<RelativeMovement> set = EnumSet.noneOf(RelativeMovement.class);
 
                             set.add(RelativeMovement.X);
@@ -141,12 +126,12 @@ public class TardisExteriorBlockEntityOpen extends BlockEntity implements GeoAni
                             set.add(RelativeMovement.Z);
 
                             entity1.teleportTo(
-                                    interior,
-                                    tardis_ball_spawn_x,
-                                    tardis_ball_spawn_y,
-                                    tardis_ball_spawn_z,
+                                    exteriorDim,
+                                    tardisExtPos.getCenter().x,
+                                    tardisExtPos.getY(),
+                                    tardisExtPos.getCenter().z,
                                     set,
-                                    entity1.getYRot()+tardisDirection.toYRot()+tardis_ball_spawn_yaw,
+                                    entity1.getYRot()+doorDirection.toYRot()+tardisDirection.toYRot(),
                                     entity1.getXRot()
                             );
                         }

@@ -71,7 +71,7 @@ public class SDControl {
                 Map<String, Object> map = new HashMap<>();
                 CompoundTag nbt_trans_tardis_data = nbt_compound_trans_tardis_data.getCompound(key);
 
-                map.put("door", (nbt_trans_tardis_data.getByte("door") != 0));
+                map.put("door", (nbt_trans_tardis_data.getByte("door") != (byte)0));
 
                 trans_tardis_data.put(key, map);
             }
@@ -113,7 +113,7 @@ public class SDControl {
             for (Map.Entry<String, Map<String, Object>> entry_trans_tardis_data : trans_tardis_data.entrySet()) {
                 CompoundTag nbt_trans_tardis_data = new CompoundTag();
 
-                nbt_trans_tardis_data.put("door", ByteTag.valueOf((Boolean) entry_trans_tardis_data.getValue().get("door") ? (byte)1 : (byte)2));
+                nbt_trans_tardis_data.put("door", ByteTag.valueOf((Boolean) entry_trans_tardis_data.getValue().get("door") ? (byte)1 : (byte)0));
 
                 nbt_compound_trans_tardis_data.put(entry_trans_tardis_data.getKey(), nbt_trans_tardis_data);
             }

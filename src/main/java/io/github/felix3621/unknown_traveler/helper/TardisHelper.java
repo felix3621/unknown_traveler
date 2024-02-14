@@ -36,4 +36,10 @@ public class TardisHelper {
             return TardisWorld;
         }
     }
+
+    public static String getTardisID(Level level) {
+        return level.dimension().location().toString()
+                .replace(UnknownTraveler.MODID + ":", "")
+                .replace("tardis_", "");
+    }
 }

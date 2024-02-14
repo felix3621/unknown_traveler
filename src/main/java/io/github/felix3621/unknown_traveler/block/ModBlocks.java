@@ -1,10 +1,8 @@
 package io.github.felix3621.unknown_traveler.block;
 
 import io.github.felix3621.unknown_traveler.UnknownTraveler;
+import io.github.felix3621.unknown_traveler.block.custom.*;
 import io.github.felix3621.unknown_traveler.block.custom.LightBlock;
-import io.github.felix3621.unknown_traveler.block.custom.NoCollisionBlock;
-import io.github.felix3621.unknown_traveler.block.custom.TardisExteriorBlock;
-import io.github.felix3621.unknown_traveler.block.custom.TardisExteriorBlockOpen;
 import io.github.felix3621.unknown_traveler.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -27,6 +25,12 @@ public class ModBlocks {
                     .strength(-1.0F, 3600000.0F).noOcclusion()));
     public static final RegistryObject<Block> TARDIS_EXTERIOR_BLOCK_OPEN = registerBlockWithoutBlockItem("tardis_exterior_block_open",
             () -> new TardisExteriorBlockOpen(BlockBehaviour.Properties.of(Material.HEAVY_METAL)
+                    .strength(-1.0F, 3600000.0F).noOcclusion()));
+    public static final RegistryObject<Block> TARDIS_INTERIOR_BLOCK = registerBlockWithoutBlockItem("tardis_interior_block",
+            () -> new TardisInteriorBlock(BlockBehaviour.Properties.of(Material.HEAVY_METAL)
+                    .strength(-1.0F, 3600000.0F).noOcclusion()));
+    public static final RegistryObject<Block> TARDIS_INTERIOR_BLOCK_OPEN = registerBlockWithoutBlockItem("tardis_interior_block_open",
+            () -> new TardisInteriorBlockOpen(BlockBehaviour.Properties.of(Material.HEAVY_METAL)
                     .strength(-1.0F, 3600000.0F).noOcclusion()));
 
     public static final RegistryObject<Block> WHITE_CONCRETE_ROUNDEL = registerBlock("roundel/white_concrete",

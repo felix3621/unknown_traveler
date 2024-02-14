@@ -14,6 +14,8 @@ public class ModLanguageProvider extends LanguageProvider {
     protected void addTranslations() {
         this.add(ModBlocks.TARDIS_EXTERIOR_BLOCK.get(), "Tardis Exterior Block");
         this.add(ModBlocks.TARDIS_EXTERIOR_BLOCK_OPEN.get(), "Tardis Exterior Block");
+        this.add(ModBlocks.TARDIS_INTERIOR_BLOCK.get(), "Tardis Interior Block");
+        this.add(ModBlocks.TARDIS_INTERIOR_BLOCK_OPEN.get(), "Tardis Interior Block");
 
         this.add(ModBlocks.WHITE_CONCRETE_ROUNDEL.get(), "White Concrete Roundel");
         this.add(ModBlocks.ORANGE_CONCRETE_ROUNDEL.get(), "Orange Concrete Roundel");

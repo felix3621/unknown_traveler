@@ -2,7 +2,6 @@ package io.github.felix3621.unknown_traveler.util.savedata;
 
 import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.block.ModBlocks;
-import io.github.felix3621.unknown_traveler.block.custom.TardisExteriorBlock;
 import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntity;
 import io.github.felix3621.unknown_traveler.block.entity.custom.TardisExteriorBlockEntityOpen;
 import io.github.felix3621.unknown_traveler.helper.Helper;
@@ -17,10 +16,9 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = UnknownTraveler.MODID)
-public class TardisExterior {
+public class TardisPlacements {
     public static void open(Integer ID) {
         Map<String, Object> map = SDControl.trans_tardis_data.get(ID.toString());
         if (map == null) map = new HashMap<>();
@@ -28,11 +26,25 @@ public class TardisExterior {
         SDControl.trans_tardis_data.put(ID.toString(), map);
         SDControl.store();
     }
+    public static void open(String ID) {
+        Map<String, Object> map = SDControl.trans_tardis_data.get(ID);
+        if (map == null) map = new HashMap<>();
+        map.put("door", true);
+        SDControl.trans_tardis_data.put(ID, map);
+        SDControl.store();
+    }
     public static void close(Integer ID) {
         Map<String, Object> map = SDControl.trans_tardis_data.get(ID.toString());
         if (map == null) map = new HashMap<>();
         map.put("door", false);
         SDControl.trans_tardis_data.put(ID.toString(), map);
+        SDControl.store();
+    }
+    public static void close(String ID) {
+        Map<String, Object> map = SDControl.trans_tardis_data.get(ID);
+        if (map == null) map = new HashMap<>();
+        map.put("door", false);
+        SDControl.trans_tardis_data.put(ID, map);
         SDControl.store();
     }
     public static void place(ServerLevel serverLevel, BlockPos pos, Direction facing, Integer ID) {
@@ -82,16 +94,15 @@ public class TardisExterior {
 
 
                 if (door) {
-                    serverWorld.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK_OPEN.get().defaultBlockState());
+                    if (serverWorld.getBlockState(pos).getBlock() != ModBlocks.TARDIS_EXTERIOR_BLOCK_OPEN.get())
+                        serverWorld.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK_OPEN.get().defaultBlockState());
                 } else {
-                    serverWorld.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK.get().defaultBlockState());
+                    if (serverWorld.getBlockState(pos).getBlock() != ModBlocks.TARDIS_EXTERIOR_BLOCK.get())
+                        serverWorld.setBlockAndUpdate(pos, ModBlocks.TARDIS_EXTERIOR_BLOCK.get().defaultBlockState());
                 }
 
                 if (serverWorld.getBlockState(pos).getValue(BlockStateProperties.HORIZONTAL_FACING) != facing)
                     serverWorld.setBlockAndUpdate(pos, serverWorld.getBlockState(pos).setValue(BlockStateProperties.HORIZONTAL_FACING, facing));
-
-                if (serverWorld.getBlockState(pos).getValue(TardisExteriorBlock.DoorState) != door)
-                    serverWorld.setBlockAndUpdate(pos, serverWorld.getBlockState(pos).setValue(TardisExteriorBlock.DoorState, door));
 
                 if (serverWorld.getBlockEntity(pos) instanceof TardisExteriorBlockEntity)
                     ((TardisExteriorBlockEntity) serverWorld.getBlockEntity(pos)).setID(id);

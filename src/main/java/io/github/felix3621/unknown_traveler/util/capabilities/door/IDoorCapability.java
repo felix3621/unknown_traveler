@@ -1,30 +1,29 @@
-package io.github.felix3621.unknown_traveler.util.capabilities.light;
+package io.github.felix3621.unknown_traveler.util.capabilities.door;
 
 import io.github.felix3621.unknown_traveler.util.capabilities.Capabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
-public interface ILightCapability extends INBTSerializable<CompoundTag> {
-    void addLightPos(BlockPos pos);
-    void setLight(int level);
-    int getLight();
-
+public interface IDoorCapability extends INBTSerializable<CompoundTag> {
+    void addDoorPos(BlockPos pos, BlockState state);
+    void tick();
     class DimProvider implements ICapabilitySerializable<CompoundTag> {
-        private final ILightCapability capability;
+        private final IDoorCapability capability;
         public DimProvider(Level world) {
-            this.capability = new LightCapability(world);
+            this.capability = new DoorCapability(world);
         }
 
         @SuppressWarnings("unchecked")
         @Override
         public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-            return cap == Capabilities.TARDIS_LIGHT_CAP ? (LazyOptional<T>) LazyOptional.of(() -> capability) : LazyOptional.empty();
+            return cap == Capabilities.TARDIS_DOOR_CAP ? (LazyOptional<T>) LazyOptional.of(() -> capability) : LazyOptional.empty();
         }
 
         @Override
