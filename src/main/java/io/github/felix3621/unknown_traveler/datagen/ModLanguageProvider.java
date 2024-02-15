@@ -2,6 +2,7 @@ package io.github.felix3621.unknown_traveler.datagen;
 
 import io.github.felix3621.unknown_traveler.UnknownTraveler;
 import io.github.felix3621.unknown_traveler.block.ModBlocks;
+import io.github.felix3621.unknown_traveler.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -57,6 +58,14 @@ public class ModLanguageProvider extends LanguageProvider {
         this.add(ModBlocks.HANGING_WIRES.get(), "Hanging Wires");
 
 
+        this.add(ModItems.EMITTER.get(), "Sonic Part: Emitter");
+        this.add(ModItems.ACTIVATOR.get(), "Sonic Part: Activator");
+        this.add(ModItems.HANDLE.get(), "Sonic Part: Handle");
+        this.add(ModItems.END.get(), "Sonic Part: End");
+
+        this.add(ModItems.SCREWDRIVER.get(), "Sonic Screwdriver");
+
+
         this.add("item_group.unknown_traveler.tardis", "Tardis");
 
         this.add("command.unknown_traveler.light.check", "The light level in this tardis is %s");
@@ -64,5 +73,15 @@ public class ModLanguageProvider extends LanguageProvider {
 
         this.add("command.unknown_traveler.error.capability", "An error with the capability occurred");
         this.add("command.unknown_traveler.error.tardis_dim", "You need to be in a tardis to execute this command");
+
+        this.add("command.unknown_traveler.sonic.part.set", "Successfully updated selected sonic part");
+        this.add("command.unknown_traveler.sonic.part.get", "Type of held sonic part: %s");
+        this.add("command.unknown_traveler.error.sonic.part.item", "Not holding a sonic part");
+        this.add("command.unknown_traveler.error.sonic.part.player", "You are not a player, so i cannot do that");
+
+        this.add("command.unknown_traveler.sonic.tool.set", "Successfully updated selected sonic tool");
+        this.add("command.unknown_traveler.sonic.tool.get", "Type of held sonic tool: %s");
+        this.add("command.unknown_traveler.error.sonic.tool.item", "Not holding a sonic tool");
+        this.add("command.unknown_traveler.error.sonic.tool.player", "You are not a player, so i cannot do that");
     }
 }

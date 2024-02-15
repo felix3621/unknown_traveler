@@ -23,9 +23,25 @@
     - stairs
   - blinking lights
   - wire hang
+- custom items
+  - sonic parts
+    - emitter
+    - activator
+    - handle
+    - end
+  - sonic screwdriver
 
 # TODO:
 - tardis systems
+- sonic screwdriver (max 500 charge):
+  - block interaction
+    - open iron door/trapdoor (5 energy)
+    - toogle redstone lamp (10 energy)
+    - trigger dropper/dispenser (5 energy)
+    - ignite tnt (20 energy)
+  - entity interaction
+    - ignite creepers (15 energy)
+    - shear sheep (15 energy)
 
 # Ideas
 - Tardis
