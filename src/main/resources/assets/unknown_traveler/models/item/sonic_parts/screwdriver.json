@@ -1,0 +1,47 @@
+{
+  "parent": "unknown_traveler:item/sonic_parts/mk1/full",
+  "overrides": [
+    {
+      "predicate": {
+        "unknown_traveler:sonic_type": 0
+      },
+      "model": "unknown_traveler:item/sonic_parts/mk1/full"
+    },
+    {
+      "predicate": {
+        "unknown_traveler:sonic_type": 1
+      },
+      "model": "unknown_traveler:item/sonic_parts/mk2/full"
+    },
+    {
+      "predicate": {
+        "unknown_traveler:sonic_type": 2
+      },
+      "model": "unknown_traveler:item/sonic_parts/mk3/full"
+    },
+    {
+      "predicate": {
+        "unknown_traveler:sonic_type": 3
+      },
+      "model": "unknown_traveler:item/sonic_parts/mk4/full"
+    },
+    {
+      "predicate": {
+        "unknown_traveler:sonic_type": 4
+      },
+      "model": "unknown_traveler:item/sonic_parts/mk5/full"
+    },
+    {
+      "predicate": {
+        "unknown_traveler:sonic_type": 5
+      },
+      "model": "unknown_traveler:item/sonic_parts/mk6/full"
+    },
+    {
+      "predicate": {
+        "unknown_traveler:sonic_type": 6
+      },
+      "model": "unknown_traveler:item/sonic_parts/mk7/full"
+    }
+  ]
+}

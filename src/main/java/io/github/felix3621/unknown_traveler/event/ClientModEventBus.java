@@ -7,8 +7,13 @@ import io.github.felix3621.unknown_traveler.block.entity.client.tardis_interior.
 import io.github.felix3621.unknown_traveler.block.entity.client.tardis_interior.open.TardisInteriorBlockRendererOpen;
 import io.github.felix3621.unknown_traveler.block.entity.client.tardis_exterior.closed.TardisExteriorBlockRenderer;
 import io.github.felix3621.unknown_traveler.block.entity.client.tardis_exterior.open.TardisExteriorBlockRendererOpen;
+import io.github.felix3621.unknown_traveler.helper.Helper;
+import io.github.felix3621.unknown_traveler.item.ModItems;
+import io.github.felix3621.unknown_traveler.item.custom.SonicBasePart;
+import io.github.felix3621.unknown_traveler.item.custom.SonicScrewdriver;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,7 +21,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = UnknownTraveler.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ModEventClientBusEvents {
+public class ClientModEventBus {
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.TARDIS_EXTERIOR_BLOCK_ENTITY.get(), TardisExteriorBlockRenderer::new);
@@ -28,6 +33,27 @@ public class ModEventClientBusEvents {
 
     @SubscribeEvent
     public static void clientSetup(final FMLClientSetupEvent event) {
+        renderLayers();
+        event.enqueueWork(predicates());
+    }
+
+    private static Runnable predicates() {
+        return () -> {
+            ItemProperties.register(ModItems.EMITTER.get(),
+                    Helper.createRL("sonic_type"), (stack, level, living, id) -> SonicBasePart.getType(stack));
+            ItemProperties.register(ModItems.ACTIVATOR.get(),
+                    Helper.createRL("sonic_type"), (stack, level, living, id) -> SonicBasePart.getType(stack));
+            ItemProperties.register(ModItems.HANDLE.get(),
+                    Helper.createRL("sonic_type"), (stack, level, living, id) -> SonicBasePart.getType(stack));
+            ItemProperties.register(ModItems.END.get(),
+                    Helper.createRL("sonic_type"), (stack, level, living, id) -> SonicBasePart.getType(stack));
+
+            ItemProperties.register(ModItems.SCREWDRIVER.get(),
+                    Helper.createRL("sonic_type"), (stack, level, living, id) -> SonicScrewdriver.getType(stack));
+        };
+    }
+
+    private static void renderLayers() {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.TARDIS_EXTERIOR_BLOCK_OPEN.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.TARDIS_EXTERIOR_BLOCK.get(), RenderType.cutout());
 
